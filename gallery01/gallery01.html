@@ -7,6 +7,7 @@
   <title>건물사진들로 사진 띄우는 거 연습하기</title>
   <link rel="stylesheet" href="./css/reset.css">
   <link rel="stylesheet" href="./css/gallery01.css">
+  <script src="../js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 
@@ -22,6 +23,34 @@
   </ul>
 
   <p id="test"></p>
+
+  <script>
+    $(function(){
+      //준비하기
+      $('body').append('<div id="back"></div><div id="main"></div>');
+
+      $('li>a').on('click',function(){
+        let pic = $(this).attr('href');
+        $('#main').show().prepend('<img src="'+pic+'">')
+        $('#back').show();    
+        //가운데 정렬
+        let mWidth = $('#main').width()/2 
+        let mHeight = $('#main').height()/2
+        // console.log(iWidth,iHeight)
+        $('div#main').css({
+          marginLeft:'-'+mWidth+'px',
+          marginTop:'-'+mHeight+'px'
+        })
+        // 
+        return false
+      });
+
+      $('#back').on('click',function(){
+        $('#back').hide();
+        $('#main').hide().empty();
+      })
+    });
+  </script>
   
 </body>
 </html>

@@ -7,10 +7,11 @@
   <title>modal 연습</title>
   <link rel="stylesheet" href="./css/reset.css">
   <link rel="stylesheet" href="./css/modal.css">
+  <script src="../js/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 
-  <div id="box">
+  <div id="box03">
 
     <article>
       <h1>Modal</h1>
@@ -32,7 +33,7 @@
               <img src="./images/pic02.png" alt="작품2" name="1">
               <figcaption>
                 <dl>
-                  <d>title02</dt>
+                  <dt>title02</dt>
                   <dd>work02 Offical Site Design Renewal & Coding</dd>
                 </dl>
               </figcaption>
@@ -55,29 +56,86 @@
 
     <section id="modal">
       <div>
-        <h1>title</h1>
+        <h3>title</h3>
         <figure>
           <img src="./images/pic01.png" alt="작품명">
           <figcaption>
             <dl class="sDl">
               <dt>제작연도</dt>
-              <dl></dl>
+              <dd>?</dd>
               <dt>사용 프로그램</dt>
-              <dl></dl>
+              <dd>?</dd>
               <dt>설명</dt>
-              <dl></dl>
+              <dd>?</dd>
             </dl>
           </figcaption>
         </figure>
       </div>
 
-      <p class="mClose">
-        <sapn></sapn>
-        <sapn></sapn>
+      <p id="mClose">
+        <span></span>
+        <span></span>
       </p>
     </section>
 
   </div>
   
+
+  <script>
+    // 타이틀, 이미지, 연도, 프로그램, 설명
+
+    //준비하기
+    const Title = document.querySelector('#modal>div>h3');
+    const Pic = document.querySelector('#modal img')
+    const Year = document.querySelector('.sDl>dd:nth-child(2)')
+    const Text1 = document.querySelector('.sDl>dd:nth-child(4)')
+    const Text2 = document.querySelector('.sDl>dd:nth-child(6)')
+
+    let Btn = document.querySelectorAll('article img');
+    let BtnClose = document.querySelector('#mClose')
+
+    //생성자함수
+    function Picture(title,pic,year,text1,text2){
+      this.title = title;
+      this.pic = pic;
+      this.year = year;
+      this.text1 = text1;
+      this.text2 = text2;
+    }
+
+    //프로토타입
+    Picture.prototype.action = function(){
+      Title.innerHTML = this.title;
+      Pic.setAttribute('src',this.pic);
+      Year.innerHTML = this.year;
+      Text1.innerHTML = this.text1;
+      Text2.innerHTML = this.text2;
+    }
+
+    //인스턴스
+    let source = [
+      new Picture('title01','./images/pic01.png','1999년','HTML','웹 문서를 만들기 위하여 사용하는 기본적인 웹 언어의 한 종류이다. 하이퍼텍스트를 작성하기 위해 개발되었다.'),
+      new Picture('title02','./images/pic02.png','2003년','CSS','웹 문서의 전반적인 스타일을 미리 저장해 둔 스타일시트이다. 문서 전체의 일관성을 유지할 수 있고, 세세한 스타일 지정의 필요를 줄어들게 하였다.'),
+      new Picture('title03','./images/pic03.png','1995년','JAVASCRIPT','자바스크립트는 크로스 플랫폼(cross platform), 객체지향 스크립트 언어로 웹페이지의 동작을 담당한다.')
+    ]
+
+    // 클릭이벤트
+    Btn.forEach(function(Btn){
+      Btn.addEventListener('click',function(e){
+        // let num = document.querySelector('li>figure>img').getAttribute('name');
+        let num = this.getAttribute('name');
+        // console.log(num)
+        source[num].action();
+        document.querySelector('#modal').style.display = 'block';
+      })
+    });
+
+    BtnClose.addEventListener('click',function(){
+      document.querySelector('#modal').style.display = 'none';
+    });
+
+
+  </script>
+
 </body>
 </html>

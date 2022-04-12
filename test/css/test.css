@@ -1,0 +1,29 @@
+section{
+  width:100%; height:100%;
+}
+section>figure{
+  width:1000px; height:500px;
+  margin:100px auto 130px;
+  position:relative
+}
+section>figure>img{
+  position: absolute;
+  top:0; left:0;
+}
+section>figure>figcaption{
+  position:absolute;
+  top:100%; left:45%;
+  font:bolder 30px/50px '나눔고딕',sans-serif
+}
+
+ul{
+  width:1200px;
+  margin:0 auto;
+  display:flex;
+}
+ul>li{
+  /* float:left; */
+}
+ul>li>img{
+  width:300px;
+}
